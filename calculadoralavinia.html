@@ -1,0 +1,225 @@
+<!-- Criado por Marise Miranda | 2017.1 -->
+<!-- Adaptado por Matheus Matos | 2025.1 -->
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Lavinia</title>
+</head>
+<style>
+    /* margem */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial;
+    }
+
+
+    body {
+        background-color: rgb(96, 49, 79);
+        color: pink;
+        font: normal 20px Arial;
+        position: center;
+
+    }
+
+    #demo1 {
+        /*input*/
+        background-color: pink;
+        font: normal 20px Arial;
+        color: rgb(69, 46, 61);
+    }
+
+    h1 {
+        font: normal 80px Arial;
+    }
+
+    #linha-pontilhada {
+        border: 5px dotted rgb(255, 16, 147);
+        padding: 10px;
+        font: normal 30px Arial;
+        font-weight: bold;
+        color: rgb(253, 221, 243);
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(233, 30, 99, 0.4);
+        /* Sombra*/
+        max-width: 450px;
+        /*limita a borda*/
+        text-align: center;
+    }
+
+    button {
+        background-color: pink;
+        color: rgb(69, 46, 61);
+        border-radius: 10px;
+        /*formato*/
+        border: none;
+        /*tira a borda */
+        padding: 15px 32px;
+        /*tamanho */
+        text-align: center;
+        /*deixa o texto no centro*/
+        font-size: 20px;
+        /*fonte do tamanho certo*/
+        width: 200px;
+        /*tamanho*/
+        height: 50px;
+        /*tamanho*/
+        transition: width 0.4s;
+        transition: 0.4s;
+        /* Transição*/
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    }
+
+    button:hover {
+        width: 280px;
+        /* Aumenta  */
+        background-color: rgb(70, 36, 64);
+        color: white;
+        box-shadow: 0 8px 20px rgb(232, 36, 137), 0 0 15px violet;
+        transform: translateY(-2px);
+    }
+
+    button {
+        transition: width 2s, height 4s, background-color 3s;
+
+    }
+
+    select {
+        background-color: pink;
+        font: normal 20px Arial;
+        color: rgb(69, 46, 61);
+        border: 5px solid rgb(239, 141, 200);
+        border-radius: 8px;
+        padding: 10px 15px;
+    }
+
+    #primeiro {
+        /*input*/
+        background-color: pink;
+        font: normal 20px Arial;
+        color: rgb(69, 46, 61);
+        border: 5px solid rgb(239, 141, 200);
+        border-radius: 8px;
+        padding: 10px 15px;
+    }
+
+    #segundo {
+        background-color: pink;
+        font: normal 20px Arial;
+        color: rgb(69, 46, 61);
+        border: 5px solid rgb(239, 141, 200);
+        border-radius: 8px;
+        padding: 10px 15px;
+    }
+
+    #demo1 {
+        border: 5px solid rgb(239, 141, 200);
+        border-radius: 8px;
+        padding: 10px 15px;
+
+    }
+    .container {
+        background-color: rgba(132, 98, 118, 0.202); /* Fundo levemente transparente */
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 10px;
+        max-width: 400px;
+    }
+
+</style>
+
+<body><center>
+    <div id="linha-pontilhada">
+        <p>Calculadora</p>
+    </div><br><br>
+
+    <h3>Digite um número decimal:</h3><br>
+    <input id="demo1" type="number" placeholder="Ex: 20..">
+
+    <br><br>
+    <button onclick="converter()">Converter</button><br>
+    <div class="container" id="dentro"><br>
+        <h3>Resultados:</h3><br>
+        <p>Octal:
+        <div id="demo2"></div><br>
+        </p>
+        <p>Hexadecimal:
+        <div id="demo3"></div><br>
+        </p>
+        <p>Binário:
+        <div id="demo4"></div>
+        </p>
+    </div><br><br>
+
+    <div id="linha-pontilhada">
+        <p>Calculadora Simples</p>
+    </div><br><br>
+    <h3>Número 1:</h3><br>
+    <input type="number" id="primeiro" placeholder="Insira um número..">
+    <br><br>
+    <h3>Operação:</h3><br>
+    <select id="operacao">
+        <option value="+"> + </option>
+        <option value="-"> - </option>
+        <option value="*"> * </option>
+        <option value="/"> / </option>
+    </select><br><br>
+
+    <h3>Número 2:</h3><br>
+    <input type="number" id="segundo" placeholder="Insira um número.."><br><br>
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="container" id="dentro"><br>
+        <h3>Resultado:</h3><br>
+        <div id="resultado"></div>
+        <div id="resposta"></div>
+    </div>
+</center>
+   <img id="imagem-lavinia" src="calculado.png" alt="Calculadora">
+</body>
+
+<script>
+    function converter() {
+        var decimal = Number(demo1.value);
+
+        demo2.innerHTML = decimal.toString(8);
+        demo3.innerHTML = decimal.toString(16);
+        demo4.innerHTML = decimal.toString(2);
+    }
+
+    function calcular() {
+        var n1 = Number(primeiro.value);
+        var op = operacao.value;
+        var n2 = Number(segundo.value);
+        var resultado = 0;
+
+        if ((n1 == '') || (n2 == '')) {
+            resposta = "Por favor, digite números válidos.";
+        } else {
+            if (op === '+') {
+                resultado = n1 + n2;
+            } else if (op === '-') {
+                resultado = n1 - n2;
+            } else if (op === '*') {
+                resultado = n1 * n2;
+            } else if (op === '/') {
+                if (n2 !== 0) {
+                    resultado = n1 / n2;
+                } else {
+                    resultado = "Não é possível dividir por zero.";
+                }
+            }
+        }
+
+        resposta.innerHTML = resultado;
+    }
+
+</script>
+
+</html>
